@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bank Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f4f6f9;
+}
+
+/* COLORFUL LOGIN BACKGROUND */
+
+#loginPage{
+background:linear-gradient(45deg,#ff6a00,#ee0979,#00c6ff,#0072ff);
+background-size:400% 400%;
+animation:bgmove 8s infinite alternate;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+
+/* LOGIN BOX */
+
+.loginbox{
+width:300px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 15px black;
+text-align:center;
+}
+
+.loginbox input{
+width:90%;
+padding:10px;
+margin:8px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:200px;
+height:100vh;
+background:#0d6efd;
+color:white;
+position:fixed;
+padding-top:20px;
+}
+
+.sidebar h2{
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+color:white;
+padding:12px;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#084298;
+}
+
+/* MAIN */
+
+.main{
+margin-left:200px;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 8px gray;
+margin-bottom:20px;
+}
+
+.balance{
+font-size:28px;
+color:#198754;
+}
+
+input{
+padding:10px;
+margin:5px;
+}
+
+button{
+padding:10px 15px;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+.deposit{background:#198754;}
+.withdraw{background:#dc3545;}
+.transfer{background:#fd7e14;}
+.loginbtn{background:#0d6efd;}
+
+#history{
+max-height:200px;
+overflow:auto;
+border:1px solid #ddd;
+padding:10px;
+}
+
+#dashboard{
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+<div class="loginbox">
+
+<h2>Bank Login</h2>
+
+<input type="text" id="user" placeholder="Username"><br>
+<input type="password" id="pass" placeholder="Password"><br>
+
+<button class="loginbtn" onclick="login()">Login</button>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<div class="sidebar">
+
+<h2>My Bank</h2>
+
+<a href="#">Dashboard</a>
+<a href="#">Accounts</a>
+<a href="#">Transfer</a>
+<a href="#">Transactions</a>
+<a href="#" onclick="logout()">Logout</a>
+
+</div>
+
+
+<div class="main">
+
+<div class="card">
+
+<h2>Account Balance</h2>
+
+<div class="balance">
+₹ <span id="balance">10000</span>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>Deposit / Withdraw</h3>
+
+<input type="number" id="amount" placeholder="Enter Amount">
+
+<button class="deposit" onclick="deposit()">Deposit</button>
+
+<button class="withdraw" onclick="withdraw()">Withdraw</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Transfer Money</h3>
+
+<input type="text" id="account" placeholder="Account Number">
+
+<input type="number" id="transferAmount" placeholder="Amount">
+
+<button class="transfer" onclick="transfer()">Transfer</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Transaction History</h3>
+
+<div id="history"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let balance = 10000;
+
+/* LOGIN */
+
+function login(){
+
+let u = document.getElementById("user").value;
+let p = document.getElementById("pass").value;
+
+if(u=="bank" && p=="12345"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("dashboard").style.display="block";
+
+}else{
+
+alert("Wrong Username or Password");
+
+}
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+document.getElementById("dashboard").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+
+}
+
+/* BANK FUNCTIONS */
+
+function deposit(){
+
+let amt = Number(document.getElementById("amount").value);
+
+balance += amt;
+
+updateBalance();
+
+addHistory("Deposit ₹"+amt);
+
+}
+
+function withdraw(){
+
+let amt = Number(document.getElementById("amount").value);
+
+if(amt>balance){
+
+alert("Insufficient Balance");
+
+}else{
+
+balance -= amt;
+
+updateBalance();
+
+addHistory("Withdraw ₹"+amt);
+
+}
+
+}
+
+function transfer(){
+
+let acc = document.getElementById("account").value;
+
+let amt = Number(document.getElementById("transferAmount").value);
+
+if(amt>balance){
+
+alert("Insufficient Balance");
+
+}else{
+
+balance -= amt;
+
+updateBalance();
+
+addHistory("Transfer ₹"+amt+" to "+acc);
+
+}
+
+}
+
+function updateBalance(){
+
+document.getElementById("balance").innerText = balance;
+
+}
+
+function addHistory(text){
+
+let div = document.createElement("div");
+
+div.innerText = text;
+
+document.getElementById("history").prepend(div);
+
+}
+
+</script>
+
+</body>
+</html>
+
