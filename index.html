@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>College Student Management System</title>
+<title>Bank Dashboard</title>
 
 <style>
 
 body{
-font-family:Arial;
 margin:0;
-background:linear-gradient(135deg,#0044cc,#00c6ff,#7b2ff7);
-min-height:100vh;
+font-family:Arial;
+background:#f4f6f9;
 }
 
-/* COLLEGE TITLE */
-.college-title{
-color:white;
-text-align:center;
-font-size:28px;
-font-weight:bold;
-margin-top:20px;
-padding:10px;
-}
+/* COLORFUL LOGIN BACKGROUND */
 
-/* LOGIN PAGE */
 #loginPage{
+background:linear-gradient(45deg,#ff6a00,#ee0979,#00c6ff,#0072ff);
+background-size:400% 400%;
+animation:bgmove 8s infinite alternate;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-min-height:100vh;
 }
 
-.login-box{
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+
+/* LOGIN BOX */
+
+.loginbox{
+width:300px;
 background:white;
-padding:40px;
+padding:25px;
 border-radius:10px;
-box-shadow:0 0 20px rgba(0,0,0,0.3);
+box-shadow:0 0 15px black;
 text-align:center;
-width:90%;
-max-width:320px;
 }
 
-.login-box h2{
-color:#0044cc;
+.loginbox input{
+width:90%;
+padding:10px;
+margin:8px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:200px;
+height:100vh;
+background:#0d6efd;
+color:white;
+position:fixed;
+padding-top:20px;
+}
+
+.sidebar h2{
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+color:white;
+padding:12px;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#084298;
+}
+
+/* MAIN */
+
+.main{
+margin-left:200px;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 8px gray;
 margin-bottom:20px;
 }
 
-.login-box input{
-width:90%;
-padding:10px;
-margin:10px 0;
-border:1px solid #ccc;
-border-radius:5px;
-}
-
-.loginbtn{
-background:linear-gradient(90deg,#007bff,#00c6ff);
-color:white;
-padding:10px 20px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-width:100%;
-font-size:16px;
-}
-
-.loginbtn:hover{
-background:linear-gradient(90deg,#0056b3,#0099cc);
-}
-
-/* DASHBOARD */
-#dashboard{
-display:none;
-background:#f4f6f9;
-min-height:100vh;
-text-align:center;
-}
-
-h1{
-background:#007bff;
-color:white;
-padding:15px;
-margin:0;
-font-size:24px;
-}
-
-.container{
-width:90%;
-margin:auto;
-margin-top:20px;
+.balance{
+font-size:28px;
+color:#198754;
 }
 
 input{
@@ -99,247 +99,225 @@ margin:5px;
 button{
 padding:10px 15px;
 border:none;
+color:white;
 cursor:pointer;
 }
 
-.add{background:green;color:white;}
-.edit{background:orange;color:white;}
-.delete{background:red;color:white;}
+.deposit{background:#198754;}
+.withdraw{background:#dc3545;}
+.transfer{background:#fd7e14;}
+.loginbtn{background:#0d6efd;}
 
-table{
-width:100%;
-border-collapse:collapse;
-background:white;
-margin-top:20px;
-}
-
-th,td{
+#history{
+max-height:200px;
+overflow:auto;
 border:1px solid #ddd;
 padding:10px;
 }
 
-th{
-background:#007bff;
-color:white;
+#dashboard{
+display:none;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width:600px){
-
-.college-title{
-font-size:20px;
-}
-
-h1{
-font-size:18px;
-}
-
-.login-box{
-padding:25px;
-}
-
-table{
-font-size:12px;
-}
-
-}
 </style>
-
 </head>
 
 <body>
-
-<div class="college-title">
-    <br>
-🎓 S.M.R.B.P. Polytechnic College</div>
-</div>
 
 <!-- LOGIN PAGE -->
 
 <div id="loginPage">
 
-<div class="login-box">
+<div class="loginbox">
 
-<h2>Admin Login</h2>
+<h2>Bank Login</h2>
 
-<input type="text" id="user" placeholder="Username">
-<input type="password" id="pass" placeholder="Password">
+<input type="text" id="user" placeholder="Username"><br>
+<input type="password" id="pass" placeholder="Password"><br>
 
 <button class="loginbtn" onclick="login()">Login</button>
 
 </div>
-</div>
 
 </div>
+
 
 <!-- DASHBOARD -->
 
 <div id="dashboard">
 
-<h1>Student Management System</h1>
+<div class="sidebar">
 
-<div class="container">
+<h2>My Bank</h2>
 
-<input type="text" id="name" placeholder="Student Name">
-<input type="text" id="roll" placeholder="Roll Number">
-<input type="text" id="course" placeholder="Course">
-<input type="number" id="totalfee" placeholder="Total Fee">
-<input type="number" id="paidfee" placeholder="Paid Fee">
+<a href="#">Dashboard</a>
+<a href="#">Accounts</a>
+<a href="#">Transfer</a>
+<a href="#">Transactions</a>
+<a href="#" onclick="logout()">Logout</a>
 
-<br><br>
+</div>
 
-<button class="add" onclick="addStudent()">Add Student</button>
 
-<br><br>
+<div class="main">
 
-<input type="text" id="search" placeholder="Search Student" onkeyup="searchStudent()">
+<div class="card">
 
-<br><br>
+<h2>Account Balance</h2>
 
-<table id="studentTable">
+<div class="balance">
+₹ <span id="balance">10000</span>
+</div>
 
-<thead>
-<tr>
-<th>Name</th>
-<th>Roll</th>
-<th>Course</th>
-<th>Total Fee</th>
-<th>Paid Fee</th>
-<th>Pending</th>
-<th>Action</th>
-</tr>
-</thead>
+</div>
 
-<tbody></tbody>
 
-</table>
+<div class="card">
+
+<h3>Deposit / Withdraw</h3>
+
+<input type="number" id="amount" placeholder="Enter Amount">
+
+<button class="deposit" onclick="deposit()">Deposit</button>
+
+<button class="withdraw" onclick="withdraw()">Withdraw</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Transfer Money</h3>
+
+<input type="text" id="account" placeholder="Account Number">
+
+<input type="number" id="transferAmount" placeholder="Amount">
+
+<button class="transfer" onclick="transfer()">Transfer</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Transaction History</h3>
+
+<div id="history"></div>
 
 </div>
 
 </div>
+
+</div>
+
 
 <script>
+
+let balance = 10000;
 
 /* LOGIN */
 
 function login(){
 
-let user=document.getElementById("user").value;
-let pass=document.getElementById("pass").value;
+let u = document.getElementById("user").value;
+let p = document.getElementById("pass").value;
 
-if(user=="admin" && pass=="12345"){
+if(u=="bank" && p=="12345"){
 
 document.getElementById("loginPage").style.display="none";
 document.getElementById("dashboard").style.display="block";
 
-}
-else{
+}else{
+
 alert("Wrong Username or Password");
+
+}
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+document.getElementById("dashboard").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+
+}
+
+/* BANK FUNCTIONS */
+
+function deposit(){
+
+let amt = Number(document.getElementById("amount").value);
+
+balance += amt;
+
+updateBalance();
+
+addHistory("Deposit ₹"+amt);
+
+}
+
+function withdraw(){
+
+let amt = Number(document.getElementById("amount").value);
+
+if(amt>balance){
+
+alert("Insufficient Balance");
+
+}else{
+
+balance -= amt;
+
+updateBalance();
+
+addHistory("Withdraw ₹"+amt);
+
 }
 
 }
 
-/* STUDENT SYSTEM */
+function transfer(){
 
-let students = JSON.parse(localStorage.getItem("students")) || [];
+let acc = document.getElementById("account").value;
 
-function saveData(){
-localStorage.setItem("students",JSON.stringify(students));
-}
+let amt = Number(document.getElementById("transferAmount").value);
 
-function displayStudents(){
+if(amt>balance){
 
-let table=document.querySelector("#studentTable tbody");
-table.innerHTML="";
+alert("Insufficient Balance");
 
-students.forEach((s,index)=>{
+}else{
 
-let pending=s.totalfee - s.paidfee;
+balance -= amt;
 
-let row=`
-<tr>
-<td>${s.name}</td>
-<td>${s.roll}</td>
-<td>${s.course}</td>
-<td>${s.totalfee}</td>
-<td>${s.paidfee}</td>
-<td>${pending}</td>
-<td>
-<button class="edit" onclick="editStudent(${index})">Edit</button>
-<button class="delete" onclick="deleteStudent(${index})">Delete</button>
-</td>
-</tr>
-`;
+updateBalance();
 
-table.innerHTML += row;
-
-});
+addHistory("Transfer ₹"+amt+" to "+acc);
 
 }
 
-function addStudent(){
-
-let name=document.getElementById("name").value;
-let roll=document.getElementById("roll").value;
-let course=document.getElementById("course").value;
-let totalfee=document.getElementById("totalfee").value;
-let paidfee=document.getElementById("paidfee").value;
-
-if(name==""||roll==""||course==""||totalfee==""||paidfee==""){
-alert("Fill all fields");
-return;
 }
 
-students.push({name,roll,course,totalfee,paidfee});
+function updateBalance(){
 
-saveData();
-displayStudents();
-
-document.querySelectorAll(".container input").forEach(i=>i.value="");
+document.getElementById("balance").innerText = balance;
 
 }
 
-function deleteStudent(index){
-students.splice(index,1);
-saveData();
-displayStudents();
-}
+function addHistory(text){
 
-function editStudent(index){
+let div = document.createElement("div");
 
-let s=students[index];
+div.innerText = text;
 
-document.getElementById("name").value=s.name;
-document.getElementById("roll").value=s.roll;
-document.getElementById("course").value=s.course;
-document.getElementById("totalfee").value=s.totalfee;
-document.getElementById("paidfee").value=s.paidfee;
-
-students.splice(index,1);
-
-saveData();
-displayStudents();
+document.getElementById("history").prepend(div);
 
 }
-
-function searchStudent(){
-
-let input=document.getElementById("search").value.toLowerCase();
-let rows=document.querySelectorAll("#studentTable tbody tr");
-
-rows.forEach(row=>{
-
-let name=row.children[0].innerText.toLowerCase();
-row.style.display = name.includes(input) ? "" : "none";
-
-});
-
-}
-
-displayStudents();
 
 </script>
 
 </body>
 </html>
-```
+
