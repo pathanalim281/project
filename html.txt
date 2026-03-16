@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-<title>Bank Dashboard</title>
+<title>Ultimate SaaS Startup Software</title>
 
 <style>
 
@@ -11,198 +12,293 @@ font-family:Arial;
 background:#f4f6f9;
 }
 
-/* COLORFUL LOGIN BACKGROUND */
+/* LOGIN */
 
-#loginPage{
-background:linear-gradient(45deg,#ff6a00,#ee0979,#00c6ff,#0072ff);
-background-size:400% 400%;
-animation:bgmove 8s infinite alternate;
+.loginPage{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+background:linear-gradient(45deg,#0072ff,#00c6ff);
 }
 
-@keyframes bgmove{
-0%{background-position:0% 50%;}
-100%{background-position:100% 50%;}
-}
-
-/* LOGIN BOX */
-
-.loginbox{
-width:300px;
+.loginBox{
 background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 0 15px black;
+padding:40px;
 text-align:center;
-}
-
-.loginbox input{
-width:90%;
-padding:10px;
-margin:8px;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-width:200px;
-height:100vh;
-background:#0d6efd;
-color:white;
-position:fixed;
-padding-top:20px;
-}
-
-.sidebar h2{
-text-align:center;
-}
-
-.sidebar a{
-display:block;
-color:white;
-padding:12px;
-text-decoration:none;
-}
-
-.sidebar a:hover{
-background:#084298;
-}
-
-/* MAIN */
-
-.main{
-margin-left:200px;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 8px gray;
-margin-bottom:20px;
-}
-
-.balance{
-font-size:28px;
-color:#198754;
+box-shadow:0 0 10px gray;
 }
 
 input{
 padding:10px;
-margin:5px;
+margin:8px;
+width:220px;
 }
 
 button{
-padding:10px 15px;
-border:none;
+padding:10px 20px;
+background:#007bff;
 color:white;
+border:none;
 cursor:pointer;
 }
 
-.deposit{background:#198754;}
-.withdraw{background:#dc3545;}
-.transfer{background:#fd7e14;}
-.loginbtn{background:#0d6efd;}
+/* DASHBOARD */
 
-#history{
-max-height:200px;
-overflow:auto;
-border:1px solid #ddd;
-padding:10px;
-}
-
-#dashboard{
+.dashboard{
 display:none;
 }
 
+.sidebar{
+width:230px;
+height:100vh;
+background:#2c3e50;
+color:white;
+position:fixed;
+}
+
+.sidebar h2{
+text-align:center;
+padding:20px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:15px;
+cursor:pointer;
+}
+
+.sidebar li:hover{
+background:#34495e;
+}
+
+.main{
+margin-left:230px;
+padding:30px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+padding:20px;
+margin:10px;
+display:inline-block;
+width:200px;
+box-shadow:0 0 10px gray;
+}
+
+/* PANEL */
+
+.panel{
+background:white;
+padding:20px;
+margin:20px;
+width:500px;
+box-shadow:0 0 10px gray;
+}
+
+/* PROGRESS */
+
+.bar{
+width:100%;
+background:#ddd;
+height:20px;
+}
+
+.progress{
+height:20px;
+background:green;
+width:0%;
+}
+
+/* DARK MODE */
+
+.dark{
+background:#111;
+color:white;
+}
+
+.dark .card{
+background:#333;
+}
+
+.dark .panel{
+background:#333;
+}
+
+/* NOTICE */
+
+.notice{
+position:fixed;
+top:20px;
+right:20px;
+background:green;
+color:white;
+padding:10px;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <!-- LOGIN PAGE -->
 
-<div id="loginPage">
+<div class="loginPage" id="loginPage">
 
-<div class="loginbox">
+<div class="loginBox">
 
-<h2>Bank Login</h2>
+<h2>SaaS Startup Software </h2>
+<h2>Login</h2>
 
-<input type="text" id="user" placeholder="Username"><br>
-<input type="password" id="pass" placeholder="Password"><br>
+<input type="text" id="user" placeholder="Username"><br> <input type="password" id="pass" placeholder="Password"><br>
 
-<button class="loginbtn" onclick="login()">Login</button>
+<button onclick="login()">Login</button>
+
+<h3>Register</h3>
+
+<input type="text" id="regUser" placeholder="New Username"><br> <input type="password" id="regPass" placeholder="New Password"><br>
+
+<button onclick="register()">Register</button>
 
 </div>
 
 </div>
-
 
 <!-- DASHBOARD -->
 
-<div id="dashboard">
+<div class="dashboard" id="dashboard">
 
 <div class="sidebar">
 
-<h2>My Bank</h2>
+<h2>SaaS Startup</h2>
 
-<a href="#">Dashboard</a>
-<a href="#">Accounts</a>
-<a href="#">Transfer</a>
-<a href="#">Transactions</a>
-<a href="#" onclick="logout()">Logout</a>
+<ul>
+<li onclick="showSection('home')">Dashboard</li>
+<li onclick="showSection('users')">Users</li>
+<li onclick="showSection('projects')">Projects</li>
+<li onclick="showSection('tasks')">Tasks</li>
+<li onclick="showSection('files')">Files</li>
+<li onclick="darkMode()">Dark Mode</li>
+<li onclick="logout()">Logout</li>
+</ul>
 
 </div>
-
 
 <div class="main">
 
-<div class="card">
+<!-- DASHBOARD -->
 
-<h2>Account Balance</h2>
+<div id="home">
 
-<div class="balance">
-₹ <span id="balance">10000</span>
-</div>
-
-</div>
-
+<h1>Dashboard</h1>
 
 <div class="card">
-
-<h3>Deposit / Withdraw</h3>
-
-<input type="number" id="amount" placeholder="Enter Amount">
-
-<button class="deposit" onclick="deposit()">Deposit</button>
-
-<button class="withdraw" onclick="withdraw()">Withdraw</button>
-
+<h3>Total Users</h3>
+<p id="userCount">0</p>
 </div>
-
 
 <div class="card">
-
-<h3>Transfer Money</h3>
-
-<input type="text" id="account" placeholder="Account Number">
-
-<input type="number" id="transferAmount" placeholder="Amount">
-
-<button class="transfer" onclick="transfer()">Transfer</button>
-
+<h3>Total Projects</h3>
+<p id="projectCount">0</p>
 </div>
-
 
 <div class="card">
+<h3>Total Tasks</h3>
+<p id="taskCount">0</p>
+</div>
 
-<h3>Transaction History</h3>
+<div class="panel">
 
-<div id="history"></div>
+<h3>Project Progress</h3>
+
+<div class="bar">
+<div class="progress"></div>
+</div>
+
+</div>
+
+<button onclick="backup()">Download Backup</button>
+
+<input type="file" onchange="restore(event)">
+
+</div>
+
+<!-- USERS -->
+
+<div id="users" style="display:none">
+
+<div class="panel">
+
+<h3>User Management</h3>
+
+<input type="text" id="newUser" placeholder="Add user">
+
+<button onclick="addUser()">Add</button>
+
+<ul id="userList"></ul>
+
+</div>
+
+</div>
+
+<!-- PROJECTS -->
+
+<div id="projects" style="display:none">
+
+<div class="panel">
+
+<h3>Projects</h3>
+
+<input type="text" id="newProject" placeholder="Add project">
+
+<button onclick="addProject()">Add</button>
+
+<br><br>
+
+<input type="text" id="searchProject" placeholder="Search project" onkeyup="searchProject()">
+
+<ul id="projectList"></ul>
+
+</div>
+
+</div>
+
+<!-- TASKS -->
+
+<div id="tasks" style="display:none">
+
+<div class="panel">
+
+<h3>Tasks</h3>
+
+<input type="text" id="newTask" placeholder="Add task">
+
+<button onclick="addTask()">Add</button>
+
+<ul id="taskList"></ul>
+
+</div>
+
+</div>
+
+<!-- FILES -->
+
+<div id="files" style="display:none">
+
+<div class="panel">
+
+<h3>File Upload</h3>
+
+<input type="file" onchange="uploadFile(event)">
+
+<div id="filePreview"></div>
 
 </div>
 
@@ -210,109 +306,340 @@ display:none;
 
 </div>
 
+</div>
 
 <script>
 
-let balance = 10000;
+let users=JSON.parse(localStorage.getItem("users"))||[]
+let projects=JSON.parse(localStorage.getItem("projects"))||[]
+let tasks=JSON.parse(localStorage.getItem("tasks"))||[]
+let accounts=JSON.parse(localStorage.getItem("accounts"))||[]
+
+updateUsers()
+updateProjects()
+updateTasks()
+
+function notify(msg){
+
+let n=document.createElement("div")
+n.className="notice"
+n.innerText=msg
+
+document.body.appendChild(n)
+
+setTimeout(()=>n.remove(),3000)
+
+}
 
 /* LOGIN */
 
 function login(){
 
-let u = document.getElementById("user").value;
-let p = document.getElementById("pass").value;
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
 
-if(u=="bank" && p=="12345"){
+let ok=false
 
-document.getElementById("loginPage").style.display="none";
-document.getElementById("dashboard").style.display="block";
+accounts.forEach(a=>{
+if(a.user==u && a.pass==p){
+ok=true
+}
+})
+
+if(u=="admin" && p=="1234") ok=true
+
+if(ok){
+
+document.getElementById("loginPage").style.display="none"
+document.getElementById("dashboard").style.display="block"
+
+notify("Login Success")
 
 }else{
 
-alert("Wrong Username or Password");
+alert("Wrong Login")
 
 }
+
+}
+
+/* REGISTER */
+
+function register(){
+
+let u=document.getElementById("regUser").value
+let p=document.getElementById("regPass").value
+
+accounts.push({user:u,pass:p})
+
+localStorage.setItem("accounts",JSON.stringify(accounts))
+
+alert("Account Created")
 
 }
 
 /* LOGOUT */
 
 function logout(){
+location.reload()
+}
 
-document.getElementById("dashboard").style.display="none";
-document.getElementById("loginPage").style.display="flex";
+/* DARK MODE */
+
+function darkMode(){
+document.body.classList.toggle("dark")
+}
+
+/* SECTION */
+
+function showSection(s){
+
+["home","users","projects","tasks","files"].forEach(id=>{
+document.getElementById(id).style.display="none"
+})
+
+document.getElementById(s).style.display="block"
 
 }
 
-/* BANK FUNCTIONS */
+/* USERS */
 
-function deposit(){
+function addUser(){
 
-let amt = Number(document.getElementById("amount").value);
+let name=document.getElementById("newUser").value
 
-balance += amt;
+if(name=="") return
 
-updateBalance();
+users.push(name)
 
-addHistory("Deposit ₹"+amt);
+localStorage.setItem("users",JSON.stringify(users))
+
+updateUsers()
 
 }
 
-function withdraw(){
+function updateUsers(){
 
-let amt = Number(document.getElementById("amount").value);
+let list=document.getElementById("userList")
 
-if(amt>balance){
+list.innerHTML=""
 
-alert("Insufficient Balance");
+users.forEach((u,i)=>{
 
+list.innerHTML+=`
+<li>${u}
+<button onclick="deleteUser(${i})">Delete</button>
+</li>
+`
+
+})
+
+document.getElementById("userCount").innerText=users.length
+
+}
+
+function deleteUser(i){
+
+users.splice(i,1)
+
+localStorage.setItem("users",JSON.stringify(users))
+
+updateUsers()
+
+}
+
+/* PROJECTS */
+
+function addProject(){
+
+let name=document.getElementById("newProject").value
+
+if(name=="") return
+
+projects.push(name)
+
+localStorage.setItem("projects",JSON.stringify(projects))
+
+updateProjects()
+
+}
+
+function updateProjects(){
+
+let list=document.getElementById("projectList")
+
+list.innerHTML=""
+
+projects.forEach((p,i)=>{
+
+list.innerHTML+=`
+<li>${p}
+<button onclick="deleteProject(${i})">Delete</button>
+</li>
+`
+
+})
+
+document.getElementById("projectCount").innerText=projects.length
+
+}
+
+function deleteProject(i){
+
+projects.splice(i,1)
+
+localStorage.setItem("projects",JSON.stringify(projects))
+
+updateProjects()
+
+}
+
+function searchProject(){
+
+let input=document.getElementById("searchProject").value.toLowerCase()
+
+let items=document.querySelectorAll("#projectList li")
+
+items.forEach(item=>{
+
+if(item.innerText.toLowerCase().includes(input)){
+item.style.display="block"
 }else{
+item.style.display="none"
+}
 
-balance -= amt;
-
-updateBalance();
-
-addHistory("Withdraw ₹"+amt);
+})
 
 }
 
-}
+/* TASKS */
 
-function transfer(){
+function addTask(){
 
-let acc = document.getElementById("account").value;
+let name=document.getElementById("newTask").value
 
-let amt = Number(document.getElementById("transferAmount").value);
+if(name=="") return
 
-if(amt>balance){
+tasks.push({name:name,done:false})
 
-alert("Insufficient Balance");
+localStorage.setItem("tasks",JSON.stringify(tasks))
 
-}else{
-
-balance -= amt;
-
-updateBalance();
-
-addHistory("Transfer ₹"+amt+" to "+acc);
+updateTasks()
 
 }
 
+function updateTasks(){
+
+let list=document.getElementById("taskList")
+
+list.innerHTML=""
+
+tasks.forEach((t,i)=>{
+
+list.innerHTML+=`
+<li>
+${t.name} - ${t.done ? "Completed":"Pending"}
+<button onclick="completeTask(${i})">Complete</button>
+<button onclick="deleteTask(${i})">Delete</button>
+</li>
+`
+
+})
+
+document.getElementById("taskCount").innerText=tasks.length
+
+updateProgress()
+
 }
 
-function updateBalance(){
+function completeTask(i){
 
-document.getElementById("balance").innerText = balance;
+tasks[i].done=true
+
+localStorage.setItem("tasks",JSON.stringify(tasks))
+
+updateTasks()
 
 }
 
-function addHistory(text){
+function deleteTask(i){
 
-let div = document.createElement("div");
+tasks.splice(i,1)
 
-div.innerText = text;
+localStorage.setItem("tasks",JSON.stringify(tasks))
 
-document.getElementById("history").prepend(div);
+updateTasks()
+
+}
+
+/* PROGRESS */
+
+function updateProgress(){
+
+let percent=(tasks.length>0)?
+(tasks.filter(t=>t.done).length/tasks.length)*100:0
+
+document.querySelector(".progress").style.width=percent+"%"
+
+}
+
+/* FILE UPLOAD */
+
+function uploadFile(e){
+
+let file=e.target.files[0]
+
+document.getElementById("filePreview").innerText="Uploaded: "+file.name
+
+}
+
+/* BACKUP */
+
+function backup(){
+
+let data={users,projects,tasks}
+
+let blob=new Blob([JSON.stringify(data)],{type:"application/json"})
+
+let a=document.createElement("a")
+
+a.href=URL.createObjectURL(blob)
+
+a.download="saas_backup.json"
+
+a.click()
+
+}
+
+/* RESTORE */
+
+function restore(e){
+
+let file=e.target.files[0]
+
+let reader=new FileReader()
+
+reader.onload=function(){
+
+let data=JSON.parse(reader.result)
+
+users=data.users||[]
+projects=data.projects||[]
+tasks=data.tasks||[]
+
+localStorage.setItem("users",JSON.stringify(users))
+localStorage.setItem("projects",JSON.stringify(projects))
+localStorage.setItem("tasks",JSON.stringify(tasks))
+
+updateUsers()
+updateProjects()
+updateTasks()
+
+alert("Data Restored")
+
+}
+
+reader.readAsText(file)
 
 }
 
@@ -320,4 +647,3 @@ document.getElementById("history").prepend(div);
 
 </body>
 </html>
-
